@@ -5,6 +5,7 @@ import android.R.bool;
 import android.R.integer;
 import android.app.Activity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +14,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 //import askinterfaces.scanninglibrary.ScanningController;
 //import askinterfaces.tic_tac_toe.R;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -35,6 +37,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Log.v("MainActivity", "Button View");
 				Button buttonView = (Button)v;
+				System.out.println("Button " + buttonView.getText().toString() + " pressed");
 				if (buttonView.getText().toString().isEmpty()) {
 					if (mTurn) {
 						buttonView.setText("X");
@@ -43,12 +46,19 @@ public class MainActivity extends Activity {
 					}
 					mTurn = !mTurn;
 				}
+				else {
+					Toast invalidmoveToast = Toast.makeText(MainActivity.this, "Invalid Move", Toast.LENGTH_SHORT);
+					invalidmoveToast.setGravity(Gravity.CENTER, 0, 0);
+					invalidmoveToast.show();
+				}
 				if(winner(mGridLayout))
 				{
 					TextView textView = (TextView) findViewById(R.id.PlayerTurnText);
 					textView.setText("Winner!!");
+					Toast toast = Toast.makeText(MainActivity.this, "Winner!!", Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
 				}
-				v.setOnClickListener(null);
 			}
 		};
 		
@@ -62,8 +72,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Log.v("MainActivity", "Button View");
 				Button buttonView = (Button)v;
+				System.out.println("Clear grid");
 				clearGrid(mGridLayout);
-				v.setOnClickListener(null);
 			}
 		};
 		newGameButton.setOnClickListener(newGameListener);
