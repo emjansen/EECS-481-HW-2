@@ -90,8 +90,6 @@ public class MainActivity extends Activity {
 	{
 		String myTurnSymbol;
 		Button buttonView;
-		int numColumns = mGridLayout.getColumnCount();
-		int numRows = mGridLayout.getRowCount();
 		if(mTurn) //mTurn has already been flipped
 			myTurnSymbol = "O";
 		else if(!mTurn)
@@ -99,6 +97,7 @@ public class MainActivity extends Activity {
 		else
 			myTurnSymbol = " ";
 		//check all rows
+		
 /*		for(int a=0; a < numRows; a++)
 		{
 			int beginChild = a*numColumns;
@@ -117,10 +116,6 @@ public class MainActivity extends Activity {
 			}
 		}
 		*/
-		for (int i = 0; i < mGridLayout.getChildCount(); ++i) {
-			System.out.println("Button text at " + i + ": " + ((Button)mGridLayout.getChildAt(i)).getText().toString());
-		}
-		System.out.println("Meow" + ((Button) mGridLayout.getChildAt(0)).getText().toString());
 		if(((Button)findViewById(R.id.button0)).getText().toString()
 				== ((Button)findViewById(R.id.button1)).getText().toString()
 				&& ((Button)findViewById(R.id.button0)).getText().toString()
